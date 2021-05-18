@@ -1,19 +1,19 @@
 package main
 import "fmt"
-func bubbleSort(arr *[6]int) {
-	tmp:=0
-	for j:=1;j<len(*arr);j++ {
-		for i:=0;i<len(*arr)-j;i++ {
-			if (*arr)[i] > (*arr)[i+1] {
-				tmp = (*arr)[i]
-				(*arr)[i] = (*arr)[i+1]
-				(*arr)[i+1] = tmp
-			} 
-		}
+func binSearch(arr *[6]int,leftIndex int,rightIndex int,findVal int) {
+	middleIndex := (leftIndex + rightIndex) / 2
+	if leftIndex>rightIndex {
+		fmt.Println("未查找到")
 	}
-	fmt.Println(*arr)
-}	
+	if findVal < (*arr)[middleIndex] {
+		binSearch(arr,leftIndex+1,middleIndex-1,findVal)
+	} else if findVal > (*arr)[middleIndex] {
+		binSearch(arr,middleIndex+1,rightIndex-1,findVal)
+	} else if findVal == (*arr)[middleIndex] {
+		fmt.Printf("%v在数组中对应的下标是%v\n",findVal,middleIndex)
+	}
+}
 func main() {
 	var arr [6]int = [6]int{34,90,56,23,12,30}
-	bubbleSort(&arr)
+	binSearch(&arr,0,5,56)
 }
